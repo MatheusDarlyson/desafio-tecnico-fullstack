@@ -129,6 +129,12 @@ Frontend:
 * O frontend utiliza os arquivos de CSS/JS fornecidos no desafio (pasta `public/`).
 * O token JWT é armazenado no `localStorage`.
 
+* Usuário de teste:
+
+email: admin@teste.com
+
+senha: 123456
+
 ```
 
 
