@@ -1,140 +1,192 @@
-# Desafio Fullstack (Flask + React + MySQL)
+# Desafio Técnico Fullstack (Flask + React + MySQL)
 
-Projeto desenvolvido como desafio prático para a vaga de Desenvolvedor(a) Fullstack.
+Projeto desenvolvido como **desafio técnico para vaga de Desenvolvedor Fullstack**, com foco em organização, clareza de setup, validações corretas e facilidade de avaliação.
 
-## Stack
-- Backend: Python + Flask
-- Frontend: React (Vite)
-- Banco: MySQL
-- Autenticação: JWT
+O objetivo é permitir que qualquer avaliador consiga **rodar o projeto do zero**, sem configurações implícitas ou passos manuais não documentados.
 
 ---
 
-## Estrutura
+## 🧰 Stack
+
+- **Backend:** Python + Flask
+- **Frontend:** React (Vite)
+- **Banco de Dados:** MySQL
+- **Autenticação:** JWT
+
+---
+
+## 📁 Estrutura do Projeto
+
+```
+/
+├── backend/
+├── frontend/
+├── schema.sql
+└── README.md
 ```
 
-/
-backend/
-frontend/
-schema.sql
+---
 
-````
+## ✅ Requisitos
+
+- **Python:** 3.10+
+- **Node.js:** 18+
+- **MySQL:** 8+
 
 ---
 
-## Requisitos
-- Python 3.10+ (ou 3.11)
-- Node 18+
-- MySQL 8+
+## 🗄️ Banco de Dados (MySQL)
+
+### 1) Criar o banco
+```sql
+CREATE DATABASE desafio_fullstack;
+```
+
+### 2) Executar o schema
+- Abra o arquivo `schema.sql` (na **raiz do projeto**)
+- Execute o script no banco `desafio_fullstack`
+
+> O script cria todas as tabelas necessárias **e insere automaticamente um usuário de teste** para facilitar a avaliação.
+
+### 👤 Usuário de teste
+- **Email:** `admin@teste.com`
+- **Senha:** `123456`
 
 ---
 
-## Banco de Dados (MySQL)
-1. Crie o banco e tabelas usando o script:
+## 🔧 Backend (Flask)
 
-- Abra o `schema.sql` no MySQL Workbench e execute.
-
----
-
-## Backend (Flask)
-1. Acesse a pasta:
+### 1) Acesse a pasta
 ```bash
 cd backend
-````
+```
 
-2. Crie e ative o venv:
+### 2) Crie e ative o ambiente virtual
 
+**Windows (PowerShell):**
 ```bash
 python -m venv .venv
-# Windows
 .\.venv\Scripts\Activate.ps1
 ```
 
-3. Instale dependências:
-
+### 3) Instale as dependências
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Crie o arquivo `.env` em `backend/` (exemplo):
+### 4) Rodar o servidor
 
-```env
-DB_HOST=localhost
-DB_PORT=3306
-DB_USER=root
-DB_PASSWORD=root
-DB_NAME=desafio_fullstack
+> ⚠️ **Importante**  
+> Não utilize `flask run` neste projeto.  
+> Esse comando pode subir um app diferente e resultar em **404** nas rotas `/health` e `/api/*`.
 
-JWT_SECRET=super_secret_key
-```
-
-5. Rode o servidor:
+Utilize sempre o entrypoint do projeto:
 
 ```bash
-py run.py
+python run.py
 ```
 
-API base:
+### Endpoints principais
 
-* [http://127.0.0.1:5000/api](http://127.0.0.1:5000/api)
+API base:
+```text
+http://127.0.0.1:5000/api
+```
+
+Health check:
+```text
+http://127.0.0.1:5000/health
+```
 
 ---
 
-## Frontend (React)
+## 🌐 Frontend (React)
 
-1. Acesse a pasta:
-
+### 1) Acesse a pasta
 ```bash
 cd frontend
 ```
 
-2. Instale dependências:
-
+### 2) Instale as dependências
 ```bash
 npm install
 ```
 
-3. Rode o projeto:
+---
 
+### Configuração de ambiente
+
+O frontend utiliza uma variável de ambiente para definir a URL da API.
+
+Crie um arquivo `.env` na pasta `frontend` com o seguinte conteúdo:
+
+```env
+VITE_API_URL=http://127.0.0.1:5000/api
+```
+
+> O Vite carrega variáveis de ambiente **apenas no momento do start**.  
+> Sempre reinicie o frontend após alterar o `.env`.
+
+Um arquivo `.env.example` é fornecido como referência.
+
+---
+
+### 3) Rodar a aplicação
 ```bash
 npm run dev
 ```
 
-Frontend:
-
-* [http://localhost:5173](http://localhost:5173)
-
----
-
-## Rotas principais
-
-### Auth
-
-* `POST /api/login`
-
-  * body: `{ "email": "...", "password": "..." }`
-
-### Carbono Ator (protegido por JWT)
-
-* `GET /api/carbono-atores`
-* `GET /api/carbono-atores/:id`
-* `POST /api/carbono-atores`
-* `PUT /api/carbono-atores/:id`
-* `DELETE /api/carbono-atores/:id`
-
----
-
-## Observações
-
-* O frontend utiliza os arquivos de CSS/JS fornecidos no desafio (pasta `public/`).
-* O token JWT é armazenado no `localStorage`.
-
-* Usuário de teste:
-
-email: admin@teste.com
-
-senha: 123456
-
+A aplicação estará disponível em:
+```text
+http://localhost:5173
 ```
 
+---
+
+## 🔐 Autenticação
+
+- Autenticação baseada em **JWT**
+- O token é gerado no login
+- Todas as rotas protegidas exigem token válido no header `Authorization`
+
+Exemplo:
+```text
+Authorization: Bearer <token>
+```
+
+---
+
+## 🧪 Fluxo recomendado para avaliação
+
+1. Criar o banco de dados
+2. Executar `schema.sql`
+3. Subir o backend com `python run.py`
+4. Validar `/health`
+5. Realizar login (`admin@teste.com` / `123456`)
+6. Subir o frontend
+7. Utilizar a aplicação normalmente
+
+---
+
+## 🧠 Regras e validações implementadas
+
+- Validação de campos obrigatórios no backend
+- Alinhamento entre validações da API e constraints do banco
+- Autenticação obrigatória via JWT
+- Estrutura REST padronizada para CRUD
+- Frontend desacoplado e consumindo API via variável de ambiente
+
+---
+
+## ℹ️ Observações técnicas
+
+- A senha é armazenada usando **SHA-256**, considerando o contexto de desafio técnico.
+- O projeto prioriza clareza, previsibilidade e facilidade de execução.
+- Estrutura pensada para avaliação técnica e leitura de código.
+
+---
+
+## 📌 Considerações finais
+
+Este projeto foi estruturado para evitar ambiguidades no setup e permitir uma avaliação objetiva, desde a criação do banco até o uso completo da aplicação.
 

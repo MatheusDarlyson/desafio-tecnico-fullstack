@@ -30,7 +30,9 @@ def create_carbono_ator(data: dict):
     if not nome:
         return jsonify({"error": "nome é obrigatório"}), 400
 
-    documento = (data.get("documento") or "").strip() or None
+    documento = (data.get("documento") or "").strip()
+    if not documento:
+        return jsonify({"error": "documento é obrigatório"}), 400  
     tipo = (data.get("tipo") or "").strip() or None
     email = (data.get("email") or "").strip().lower() or None
     telefone = (data.get("telefone") or "").strip() or None

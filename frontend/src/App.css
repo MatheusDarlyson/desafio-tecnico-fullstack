@@ -1,42 +1,254 @@
+:root {
+  --bg: #eef2f7;
+  --card: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+  --primary: #1e40af;   /* azul */
+  --primary-2: #2563eb; /* azul mais vivo */
+  --danger: #dc2626;
+  --success: #16a34a;
+}
+
+/* remove o template do Vite (centralização) */
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  text-align: left;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* quando a página setar document.body.className = "body" */
+body.body {
+  background: var(--bg);
+  color: var(--text);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* container principal */
+.corpo {
+  padding: 20px 22px;
+}
+
+/* =========================
+   Breadcrumb / topo
+   ========================= */
+.divnavigation {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.divnavigation .div-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* esconde imagens antigas do breadcrumb (você apagou os assets) */
+.divnavigation img {
+  display: none;
+}
+
+/* pills do breadcrumb */
+.div-block-2,
+.div-block-3 {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: var(--muted);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.text-block-3 {
+  color: var(--primary);
+}
+
+/* botão voltar no topo */
+.voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #f8fafc;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.voltar:hover {
+  border-color: #cbd5e1;
+  background: #ffffff;
+}
+
+/* separador */
+.separator-breadcrumb.border-top {
+  margin: 16px 0 0;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================
+   Card / caixa do formulário
+   ========================= */
+.caixa {
+  margin-top: 16px;
+}
+
+/* área do “card-body” */
+.card-body {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: var(--shadow);
+  padding: 18px;
+}
+
+/* grid flex estilo bootstrap “mínimo” */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+/* utilitários */
+.mx-1 { margin-left: 4px; margin-right: 4px; }
+.my-3 { margin-top: 12px; margin-bottom: 12px; }
+.mt-3 { margin-top: 12px; }
+.mb-3 { margin-bottom: 12px; }
+
+/* colunas */
+.col-md-12 { flex: 0 0 100%; }
+.col-md-9  { flex: 0 0 calc(75% - 14px); }
+.col-md-4  { flex: 0 0 calc(33.333% - 14px); }
+
+/* responsivo: em telas menores, tudo 100% */
+@media (max-width: 900px) {
+  .col-md-9,
+  .col-md-4 {
+    flex: 0 0 100%;
   }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+/* labels */
+.text-primary {
+  display: inline-block;
+  margin: 6px 0 6px;
+  color: var(--primary);
+  font-weight: 800;
+  font-size: 12px;
+  letter-spacing: 0.02em;
 }
 
-.card {
-  padding: 2em;
+/* inputs/selects (seus componentes usam text-field-2 + w-input) */
+.text-field-2,
+.w-input {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  outline: none;
 }
 
-.read-the-docs {
-  color: #888;
+.text-field-2::placeholder {
+  color: #9ca3af;
+}
+
+.text-field-2:focus,
+.w-input:focus {
+  border-color: rgba(37, 99, 235, 0.45);
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
+}
+
+/* botão principal (seu form usa input.button-3 w-button) */
+.button-3,
+.w-button {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(37, 99, 235, 0.25);
+  background: linear-gradient(180deg, var(--primary-2), var(--primary));
+  color: #fff;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.button-3:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* mensagens */
+.text-danger { color: var(--danger); font-weight: 700; }
+.text-success { color: var(--success); font-weight: 700; }
+
+/* botão secundário (Voltar para listagem) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #ffffff;
+  color: var(--text);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.btn-sm { padding: 8px 10px; font-size: 13px; }
+
+.btn-outline-secondary {
+  background: #ffffff;
+  color: var(--text);
+}
+
+/* tabelas (listagem) */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+th, td {
+  padding: 12px;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background: #f8fafc;
+  color: #111827;
+  font-weight: 800;
+  font-size: 13px;
+}
+
+tr:hover td {
+  background: #fafafa;
 }
